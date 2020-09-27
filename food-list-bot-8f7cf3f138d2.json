@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "food-list-bot",
+  "private_key_id": "8f7cf3f138d27129850d9e9365d87e0de73157bf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDLAYiN6zIlm1up\ngVwY0bW5DTaFmjV8qOK+5lATX+4HSHBiwkg2rOEpiBDSkOGayVtu+s3uOmDHmWsu\nszTCW361he1cBy4L3LOR630A18UzajAcM479e1r5fJUZ0Uk4PPAe8PHUyzsgQze6\nSFTMhYtc/Gb5vj69wyZFK/yOipP8CdeESmQDyb6dETSEG8ADmrqfpqwHjYCPg49W\nLyRbbaJD8+FAfasCQUh082bfmg34lk1M+jmnOkac3C/a4JcguDvUmxo41thrfww8\nsG4DjpASGtd/KlfRgDXvscNeDSvHrtoS/SxvILDYp/WxXXqxw13bswRagmmAzejq\nFVPXtFenAgMBAAECggEAE9UiUYMXX7DHo4EdmnGHO5a8q3a/ICuiFoMkclzrDmkX\ngBgTVMwbWNX2Y5JMVOi0Q9zBMgBTPiZd4BUZfWqefJg8WFywzrxECs7WMOpJ7yKO\n13wUZyBrAqt9WyVYIUqXk6sRMfg2d/A5L7v4FN1v5qixKSSN6p1EtHmxb2RYd5Hh\nN3MPKqxaDD7qMPgpVtVWgjKKwolmmj7uWTz8Qx3Jw5/635QfDci5wuFezBNlT44n\nXcfMB+3XKNA9wXDcZw0SAjHuOLevcVLXXkPsbNAYg/CtlqfItwvfnCXkLPH4YDHq\nju2W5arV4n/ImmPihObL+YvFWc0FzCW5JLK28SMu0QKBgQDqV1CIeN3sKgGV/JpE\nbWWgyUCJH4SB1HMf8nfc4saCj7hnMx/zRttCsU1qwxDGeAx8EgnO6R1UIOlN9Rta\n7aEt1NpSQU+xNm7vRhJ/DyzD75ICPATxjEgLEkO3A9ce0n3ZCGKm4DdixVzu2Urq\niSe/6S45dqcR1D/fIYIlRuT22QKBgQDdxM6qnwlJBn+k7m0F0Zy5o6AlgI8J/QAE\nnDEOxTAOlyiLZhkm+oaUWJk+LcT/5KWoOburgNbP6Xz8z7LhgQHquQYzQ/DMwXNX\nVdrE4uFbQFayP0bZ4NIWLzuLOCnDROQwa59Ngbo2ypudKPbRaaQM7bTz/pdMVfoo\nnjzhHXOyfwKBgERCntDB9FLggYnBBOa9vwaw2L2Ykq6GxeoeZM/QtuY9Gwfkmn/w\nudmZb+WTYIWPXoOddYHx4XsqAwuURB2ebn69K8MeByqlonbMQIMGVpHUbQF9nisG\nI84lyde7pKPzyHi5upLFaRy6RLHGVc4vmYaLU82lRFErNFe4mQJmvjcxAoGAUj63\n6n0ao3N+iTtHQX4wYoR1UxMveSPUCuGmK/UjUnXqum/96f/FQ2TsSCwPQFuauB3Z\nJMyeXfMYwGWC0LDYdiVyUDblKfqgfQZBIP2HWCEvReHDs+/12fZgXcxRaLK28eIn\n7UWsOr+/IHTdvGIyTf0mO8ryb4P/R2sP5ujWTJ8CgYEAhkQCOUHenL9cAX/zvsx4\nyfT2jtbuQCqOe980ktvBJEKmLKREvos0NwbQzAbNoSNBon0WJlLvHc9BZeK4fNrC\nQtnu0nau6n5m9XngmAm7dKJ8qyHI8e1CbH6UnEpJrAaFXlnpsA/ZzG/osiSksDwm\nP4q+svVQPmEryKRi6mB2Veg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "jokes-573@food-list-bot.iam.gserviceaccount.com",
+  "client_id": "116323524577809722834",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/jokes-573%40food-list-bot.iam.gserviceaccount.com"
+}
