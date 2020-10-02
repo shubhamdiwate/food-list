@@ -285,18 +285,19 @@ def fetch_reply(msg,phone_no):
                     return (reply)#exitpoint   
             #elif msg.startswith('add comments with'):to be developed
                 #check format , set the comment with item and qty..also check qty<=qty in table   
-        #extra commands
-        else:
-            #if msg=='hello':
-            #   r={'hello','hola','yo geeky!','namaste','hey'}
-            #   reply=(r)
-            if msg=='!help':
-                reply="IMPORTANT COMMANDS: \n1.host -This command assigns you the host role if no one is hosting currently.\n2. menu -This command displays the current menu .\n3. order <item_name> <quantity> -This command is used to order food from the avail menu.\n4. remove item <item_name> -This command is used to remove that item from your order list.\n5. order summary -This command gives us our order summary (food,cost,payment stat,etc) \n\nHOST COMMANDS:\n1. view food list -This command displys the whole list to be ordered sorted by food items.\n2. view food list order by name-This command displays list of orders by indivisual person.\n3. paid status list-This command lists name of all users and their payment status.\n4. <user_name> paied <y/n> - This command helps host to mark the payed status of each user.\n5. revise price <item_name> <new_price> -This command helps the host to change prices of food items for acc to diff restaurants.\n6. order completed -This commands tells that all the orders are delivered and hence flushes all the data."
-            elif msg=='astros' or msg=='define astros' or msg=='what is astros':
-                reply="Its a community of legends studying in SAE who are secretly planning to take over top 10 richest persons in the world by their epic inventions!"
-            elif msg=='developer' or msg=='developed by' or msg.startswith('this bot is devloped by'):
-                reply="C'mon u already know that cool boi ;)\n.\n.\n yeah u got it ryt,its Shubham Diwate!"
+            #extra commands
+            
             else:
-                reply='sorry this command is not found..press !help for commands'
-            return(reply)#exitpoint
+                #if msg=='hello':
+                #   r={'hello','hola','yo geeky!','namaste','hey'}
+                #   reply=(r)
+                if msg=='!help':
+                    reply="IMPORTANT COMMANDS: \n1.host -This command assigns you the host role if no one is hosting currently.\n2. menu -This command displays the current menu .\n3. order <item_name> <quantity> -This command is used to order food from the avail menu.\n4. remove item <item_name> -This command is used to remove that item from your order list.\n5. order summary -This command gives us our order summary (food,cost,payment stat,etc) \n\nHOST COMMANDS:\n1. view food list -This command displys the whole list to be ordered sorted by food items.\n2. view food list order by name-This command displays list of orders by indivisual person.\n3. paid status list-This command lists name of all users and their payment status.\n4. <user_name> paied <y/n> - This command helps host to mark the payed status of each user.\n5. revise price <item_name> <new_price> -This command helps the host to change prices of food items for acc to diff restaurants.\n6. order completed -This commands tells that all the orders are delivered and hence flushes all the data."
+                elif msg=='astros' or msg=='define astros' or msg=='what is astros':
+                    reply="Its a community of legends studying in SAE who are secretly planning to take over top 10 richest persons in the world by their epic inventions!"
+                elif msg=='developer' or msg=='developed by' or msg.startswith('this bot is devloped by'):
+                    reply="C'mon u already know that cool boi ;)\n.\n.\n yeah u got it ryt,its Shubham Diwate!"
+                else:
+                    reply='sorry this command is not found..press !help for commands'
+                return(reply)#exitpoint
 
