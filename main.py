@@ -1,5 +1,6 @@
 import sqlite3
-
+import mysql.connector
+#//c=mysql.connector.connect(host="localhost",username='shubham',passwd='1234',database='foodbotdb.sqlite')
 conn=sqlite3.connect('foodbotdb.sqlite')
 cur=conn.cursor()
 
@@ -10,6 +11,20 @@ def checksecondword(st):
         w='false'
     else: w=m[1]
     return w
+          
+def extra_commands():#extra commands
+    if msg=='hello':
+    #   r={'hello','hola','yo geeky!','namaste','hey'}
+        reply=('hello :)')
+    elif msg=='!help':
+        reply="IMPORTANT COMMANDS: \n1.host -This command assigns you the host role if no one is hosting currently.\n2. menu -This command displays the current menu .\n3. order <item_name> <quantity> -This command is used to order food from the avail menu.\n4. remove item <item_name> -This command is used to remove that item from your order list.\n5. order summary -This command gives us our order summary (food,cost,payment stat,etc) \n\nHOST COMMANDS:\n1. view food list -This command displys the whole list to be ordered sorted by food items.\n2. view food list order by name-This command displays list of orders by indivisual person.\n3. paid status list-This command lists name of all users and their payment status.\n4. <user_name> paied <y/n> - This command helps host to mark the payed status of each user.\n5. revise price <item_name> <new_price> -This command helps the host to change prices of food items for acc to diff restaurants.\n6. order completed -This commands tells that all the orders are delivered and hence flushes all the data."
+    elif msg=='astros' or msg=='define astros' or msg=='what is astros':
+        reply="Its a community of legends studying in SAE who are secretly planning to take over top 10 richest persons in the world by their epic inventions!"
+    elif msg=='developer' or msg=='developed by' or msg.startswith('this bot is devloped by'):
+        reply="C'mon u already know that cool boi ;)\n.\n.\n yeah u got it ryt,its Shubham Diwate!"
+    else:
+        reply='sorry this command is not found..press !help for commands'
+    return(reply)#exitpoint
 
 def fetch_reply(msg,phone_no):
     #initialization
@@ -214,7 +229,7 @@ def fetch_reply(msg,phone_no):
                 reply='Order Completed...all values are flushed!'
                 return (reply)#exitpoint
         #for user types
-        elif type=='user' or type=='host':
+        if type=='user' or type=='host':
             if msg=='order summary':
                 #fetch order details make a message and send it
                 reply='ORDER SUMMARY:\nITEM\t\tQTY\tprice\titemsum '
@@ -274,7 +289,7 @@ def fetch_reply(msg,phone_no):
                     for p in price:
                         price=p[0]
                     sum=int(qty)*float(price)
-                    cur.execute('UPDATE users SET total_amount=total_amount-'+str(sum)+"WHERE no='"+no+"'")
+                    cur.execute('UPDATE users SET total_amount=total_amount-'+str(sum)+" WHERE no='"+no+"'")
                     #updating foodlist table
                     cur.execute("UPDATE foodlist SET "+item+"=0 WHERE no="+no)
                     conn.commit()
@@ -282,22 +297,19 @@ def fetch_reply(msg,phone_no):
                     return (reply)#exitpoint
                 except:
                     reply='sorry '+item+' is not available in ur order or u have entered invalid credentials'
-                    return (reply)#exitpoint   
+                return (reply)#exitpoint   
             #elif msg.startswith('add comments with'):to be developed
                 #check format , set the comment with item and qty..also check qty<=qty in table   
-            #extra commands
-            
             else:
-                #if msg=='hello':
-                #   r={'hello','hola','yo geeky!','namaste','hey'}
-                #   reply=(r)
-                if msg=='!help':
-                    reply="IMPORTANT COMMANDS: \n1.host -This command assigns you the host role if no one is hosting currently.\n2. menu -This command displays the current menu .\n3. order <item_name> <quantity> -This command is used to order food from the avail menu.\n4. remove item <item_name> -This command is used to remove that item from your order list.\n5. order summary -This command gives us our order summary (food,cost,payment stat,etc) \n\nHOST COMMANDS:\n1. view food list -This command displys the whole list to be ordered sorted by food items.\n2. view food list order by name-This command displays list of orders by indivisual person.\n3. paid status list-This command lists name of all users and their payment status.\n4. <user_name> paied <y/n> - This command helps host to mark the payed status of each user.\n5. revise price <item_name> <new_price> -This command helps the host to change prices of food items for acc to diff restaurants.\n6. order completed -This commands tells that all the orders are delivered and hence flushes all the data."
-                elif msg=='astros' or msg=='define astros' or msg=='what is astros':
-                    reply="Its a community of legends studying in SAE who are secretly planning to take over top 10 richest persons in the world by their epic inventions!"
-                elif msg=='developer' or msg=='developed by' or msg.startswith('this bot is devloped by'):
-                    reply="C'mon u already know that cool boi ;)\n.\n.\n yeah u got it ryt,its Shubham Diwate!"
-                else:
-                    reply='sorry this command is not found..press !help for commands'
-                return(reply)#exitpoint
+                return(extra_commands())
 
+            
+
+
+n=input('enter no')
+if n=='1':
+    no='7020999078'
+else:
+    no='8421676548'
+msg=input('enter msg')
+print(fetch_reply(msg,no))
