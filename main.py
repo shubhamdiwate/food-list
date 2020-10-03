@@ -303,13 +303,3 @@ def fetch_reply(msg,phone_no):
             else:
                 return(extra_commands())
 
-            
-
-
-n=input('enter no')
-if n=='1':
-    no='7020999078'
-else:
-    no='8421676548'
-msg=input('enter msg')
-print(fetch_reply(msg,no))
