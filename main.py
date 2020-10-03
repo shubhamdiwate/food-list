@@ -12,7 +12,7 @@ def checksecondword(st):
     else: w=m[1]
     return w
           
-def extra_commands():#extra commands
+def extra_commands(msg):#extra commands
     if msg=='hello':
     #   r={'hello','hola','yo geeky!','namaste','hey'}
         reply=('hello :)')
@@ -301,5 +301,5 @@ def fetch_reply(msg,phone_no):
             #elif msg.startswith('add comments with'):to be developed
                 #check format , set the comment with item and qty..also check qty<=qty in table   
             else:
-                return(extra_commands())
+                return(extra_commands(msg))
 
