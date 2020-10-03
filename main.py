@@ -1,5 +1,5 @@
 import sqlite3
-import mysql.connector
+#import mysql.connector
 #//c=mysql.connector.connect(host="localhost",username='shubham',passwd='1234',database='foodbotdb.sqlite')
 conn=sqlite3.connect('foodbotdb.sqlite')
 cur=conn.cursor()
