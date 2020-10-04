@@ -264,7 +264,7 @@ def fetch_reply(msg,phone_no):
                         qty=l[0]
                     itemsum=price*qty
                     if itemsum>0:
-                        reply=reply+'\n'+str(item).ljust(15)+str(qty).ljust(5)+str(price).ljust(7)+str(itemsum)
+                        reply=reply+'\n'+str(item)+' '*(15-len(item))+str(qty).ljust(5)+str(price).ljust(7)+str(itemsum)
                 total=cur.execute("SELECT total_amount,payed FROM users WHERE no='"+no+"'")
                 for t in total:
                     total=t[0]
