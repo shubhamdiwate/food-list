@@ -17,7 +17,7 @@ def extra_commands(msg):#extra commands
     #   r={'hello','hola','yo geeky!','namaste','hey'}
         reply=('hello :)')
     elif msg=='!help':
-        reply="IMPORTANT COMMANDS: \n1.host -This command assigns you the host role if no one is hosting currently.\n2. menu -This command displays the current menu .\n3. order <item_name> <quantity> -This command is used to order food from the avail menu.\n4. remove item <item_name> -This command is used to remove that item from your order list.\n5. order summary -This command gives us our order summary (food,cost,payment stat,etc) \n\nHOST COMMANDS:\n1. view food list -This command displys the whole list to be ordered sorted by food items.\n2. view food list order by name-This command displays list of orders by indivisual person.\n3. paid status list-This command lists name of all users and their payment status.\n4. <user_name> paied <y/n> - This command helps host to mark the payed status of each user.\n5. revise price <item_name> <new_price> -This command helps the host to change prices of food items for acc to diff restaurants.\n6. order completed -This commands tells that all the orders are delivered and hence flushes all the data."
+        reply="IMPORTANT COMMANDS: \n1.host -This command assigns you the host role if no one is hosting currently.\n2. menu -This command displays the current menu .\n3. order <item_name> <quantity> -This command is used to order food from the avail menu.\n4. remove item <item_name> -This command is used to remove that item from your order list.\n5. order summary -This command gives us our order summary (food,cost,payment stat,etc) \n\nHOST COMMANDS:\n1. view food list -This command displys the whole list to be ordered sorted by food items.\n2. view food list order by name-This command displays list of orders by indivisual person.\n3. paid status list-This command lists name of all users and their payment status.\n4. <user_name> paied <y/n> - This command helps host to mark the payed status of each user.\n5. revise price <item_name> <new_price> -This command helps the host to change prices of food items for acc to diff restaurants.\n6. order completed -This commands tells that all the orders are delivered and hence flushes all the data.\n7. transfer host to <user_name>- This command transfers the host property to guven username."
     elif msg=='astros' or msg=='define astros' or msg=='what is astros':
         reply="Its a community of legends studying in SAE who are secretly planning to take over top 10 richest persons in the world by their epic inventions!"
     elif msg=='developer' or msg=='developed by' or msg.startswith('this bot is devloped by'):
@@ -44,11 +44,11 @@ def fetch_reply(msg,phone_no):
     if msg=='menu':
         #set type as user
         #respond with the msg what would u like to eat..
-        reply='what would u like to eat..?\nITEMS\t\tPRICE'
+        reply='what would u like to eat..?\nITEMS'.ljust(19)+'PRICE'
         rows=cur.execute('SELECT * FROM fprice')
         for row in rows:
-            reply=reply+'\n'+row[0]+'\t\t'+str(row[1])
-        reply=reply+'\nto order type following command (one order at a time)\norder <ordername> <qty>'
+            reply=reply+'\n'+row[0].ljust(18)+str(row[1])
+        reply=reply+'\n------------------------\nto order type following command (one order at a time):\norder <ordername> <qty>'
         return (reply)
     elif msg=='host':
         #check if previous host is nill or not
@@ -111,7 +111,7 @@ def fetch_reply(msg,phone_no):
                 #fetch the data and make the list
                 #if has all foodlist table values 0 do not write in list
                 #at last respond with the list
-                reply='FOOD LIST (indivisually)\n===================================='
+                reply='FOOD LIST (indivisually)\n================================'
                 cur.execute('SELECT name,no,payed,total_amount FROM users')
                 details=cur.fetchall()
                 for d in details:
@@ -132,13 +132,13 @@ def fetch_reply(msg,phone_no):
                             itemsum=price*qty
                             if itemsum>0:
                                 reply=reply+'\n'+str(item).ljust(18)+str(qty).ljust(5)+str(price).ljust(6)+str(itemsum)
-                        reply=reply+'\n------------------\nTOTAL='+str(d_total)+"\npayment status: "+d_payed+'\n===================================='
+                        reply=reply+'\n------------------\nTOTAL='+str(d_total)+"\npayment status: "+d_payed+'\n================================'
                 return(reply)#exitpoint              
             elif msg=='paid status list':
                 #fetch data make the list & respond with list
                 cur.execute('SELECT name,payed,total_amount FROM users')
                 obj=cur.fetchall()
-                reply_up='PAYED STATUS LIST'+'\nName'.ljust(16)+'Payment status'+'\n-----------------------------'
+                reply_up='PAID STATUS LIST'+'\nName'.ljust(16)+'Payment_status'+'\n-----------------------------'
                 reply_down='\n-----------------------------'
                 for o in obj:
                     o_name=o[0]
@@ -264,7 +264,7 @@ def fetch_reply(msg,phone_no):
                         qty=l[0]
                     itemsum=price*qty
                     if itemsum>0:
-                        reply=reply+'\n'+str(item)+' '*(15-len(item))+str(qty).ljust(5)+str(price).ljust(7)+str(itemsum)
+                        reply=reply+'\n'+str(item).ljust(15)+str(qty).ljust(5)+str(price).ljust(7)+str(itemsum)
                 total=cur.execute("SELECT total_amount,payed FROM users WHERE no='"+no+"'")
                 for t in total:
                     total=t[0]
@@ -325,8 +325,9 @@ def fetch_reply(msg,phone_no):
                 return(extra_commands(msg))
 
 
-
-'''msg=input('enter msg-')
+#for local testing
+'''
+msg=input('enter msg-')
 n=input('enter no-')
 if n==1:
     no='7020999078'
