@@ -89,7 +89,7 @@ def fetch_reply(msg,phone_no):
             if msg=='view food list':
                 #fetch the list and make a msg..respond with the list
                 total=0
-                reply='FOOD LIST\nitem\t\tqty\trate\titem_price'
+                reply='FOOD LIST\n---------------------------------------'+'\nitem'.ljust(19)+'qty  rate  item_price'
                 cur.execute('SELECT fname,price FROM fprice')
                 li=cur.fetchall()
                 for l in li:
@@ -104,14 +104,14 @@ def fetch_reply(msg,phone_no):
                     net_item_price=float(rate)*itemsum
                     total=total+net_item_price
                     if net_item_price>0:
-                        reply=reply+'\n'+fname+'\t\t'+str(itemsum)+'\t'+str(rate)+'\t'+str(net_item_price)
-                reply=reply+'\n-----------------------\nTOTAL:'+str(total)
+                        reply=reply+'\n'+fname.ljust(18)+str(itemsum).ljust(5)+str(rate).ljust(6)+str(net_item_price)
+                reply=reply+'\n---------------------------------------\nTOTAL:'+str(total)
                 return(reply)#exitpoint
             elif msg=='view food list order by name':
                 #fetch the data and make the list
                 #if has all foodlist table values 0 do not write in list
                 #at last respond with the list
-                reply='FOOD LIST (indivisually)\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+                reply='FOOD LIST (indivisually)\n===================================='
                 cur.execute('SELECT name,no,payed,total_amount FROM users')
                 details=cur.fetchall()
                 for d in details:
@@ -120,7 +120,7 @@ def fetch_reply(msg,phone_no):
                     d_payed=d[2]
                     d_total=d[3]
                     if d_total>0:
-                        reply=reply+'\nName:'+d_name+'  No:'+d_no+'\nITEM\tQTY\tprice\titemsum '
+                        reply=reply+'\nName:'+d_name.ljust(13)+'No:'+d_no+'\nITEM'.ljust(19)+'QTY  price  itemsum '
                         cur.execute("SELECT fname,price FROM fprice")
                         fname=cur.fetchall()
                         for f in fname:
@@ -131,22 +131,25 @@ def fetch_reply(msg,phone_no):
                                 qty=l[0]
                             itemsum=price*qty
                             if itemsum>0:
-                                reply=reply+'\n'+str(item)+'\t'+str(qty)+'\t'+str(price)+'\t'+str(itemsum)
-                        reply=reply+'\n---------------\nTOTAL='+str(d_total)+"\npayment status: "+d_payed+'\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+                                reply=reply+'\n'+str(item).ljust(18)+str(qty).ljust(5)+str(price).ljust(6)+str(itemsum)
+                        reply=reply+'\n------------------\nTOTAL='+str(d_total)+"\npayment status: "+d_payed+'\n===================================='
                 return(reply)#exitpoint              
             elif msg=='paid status list':
                 #fetch data make the list & respond with list
-                cur.execute('SELECT name,payed FROM users')
+                cur.execute('SELECT name,payed,total_amount FROM users')
                 obj=cur.fetchall()
-                reply_up='PAYED STATUS LIST\nName\t\tPayment status'
-                reply_down='\n--------------------------------'
+                reply_up='PAYED STATUS LIST'+'\nName'.ljust(16)+'Payment status'+'\n-----------------------------'
+                reply_down='\n-----------------------------'
                 for o in obj:
                     o_name=o[0]
                     o_payed=o[1]
+                    o_total_amount=o[2]
+                    if o_total_amount==0:
+                        continue
                     if(o_payed=='y'):
-                        reply_up=reply_up+'\n'+o_name+'\t\t'+o_payed
+                        reply_up=reply_up+'\n'+o_name.ljust(15)+o_payed
                     else:
-                        reply_down=reply_down+'\n'+o_name+'\t\t'+o_payed
+                        reply_down=reply_down+'\n'+o_name.ljust(15)+o_payed
                 reply=reply_up+reply_down
                 return(reply)#exitpoint      
             elif checksecondword(msg)=='paid':#(<name> payed y)
@@ -228,11 +231,29 @@ def fetch_reply(msg,phone_no):
                 conn.commit()
                 reply='Order Completed...all values are flushed!'
                 return (reply)#exitpoint
+            elif msg.startswith('transfer host to'):
+                m = msg.split()
+                if len(m)!=4:
+                    reply='Invalid format of command!'
+                    return(reply)
+                t_name=m[3]
+                try:
+                    cur.execute("SELECT no FROM users WHERE name='"+t_name+"'")
+                    number=cur.fetchall()
+                    for n in number:
+                        number=n[0]
+                    cur.execute("UPDATE host SET name='"+t_name+"',no='"+number+"' WHERE id=0")
+                    conn.commit()
+                    reply='Host assigned successfully :)'
+                except:
+                    reply="Sorry '"+t_name+"' user not found!"
+                return(reply)
+
         #for user types
         if type=='user' or type=='host':
             if msg=='order summary':
                 #fetch order details make a message and send it
-                reply='ORDER SUMMARY:\nITEM\t\tQTY\tprice\titemsum '
+                reply='ORDER SUMMARY:'+'\nITEM'.ljust(18)+'QTY  price  itemsum'
                 cur.execute("SELECT fname,price FROM fprice")
                 fname=cur.fetchall()
                 for f in fname:
@@ -243,12 +264,12 @@ def fetch_reply(msg,phone_no):
                         qty=l[0]
                     itemsum=price*qty
                     if itemsum>0:
-                        reply=reply+'\n'+str(item)+'\t\t'+str(qty)+'\t'+str(price)+'\t'+str(itemsum)
+                        reply=reply+'\n'+str(item).ljust(17)+str(qty).ljust(5)+str(price).ljust(7)+str(itemsum)
                 total=cur.execute("SELECT total_amount,payed FROM users WHERE no='"+no+"'")
                 for t in total:
                     total=t[0]
                     payed=t[1]
-                reply=reply+'\n---------------\nTOTAL='+str(total)+"\npayment status: "+payed
+                reply=reply+'\n----------------\nTOTAL='+str(total)+"\npayment status: "+payed
                 return (reply)#exitpoint
             elif msg.startswith('order'):#(order <item> <qty>)
                 #check the format and update the user orders
@@ -302,4 +323,7 @@ def fetch_reply(msg,phone_no):
                 #check format , set the comment with item and qty..also check qty<=qty in table   
             else:
                 return(extra_commands(msg))
+
+
+
 
